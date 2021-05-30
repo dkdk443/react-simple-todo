@@ -5,13 +5,31 @@ import TodoFilter from './components/TodoFilter';
 import TodoForm from './components/TodoForm';
 
 function App() {
-  
+  const [task, setTask] = useState([]);
+  const [todos, setTodos] = useState([
+    { id: 1, todo: 'aaaaa1', status: 1 },
+    { id: 2, todo: 'タスク２', status: 1 },
+    { id: 3, todo: 'タスク3', status: 2 },
+    { id: 4, todo: 'タスク4', status: 3 }
+  ]);
+  const [text, setText] = useState('');
+  let newId = todos.slice(-1)[0].id + 1;
+  const newTask = (text) => {
+    setText(text);
+  }
+  const addTask = () => {
+    if (text === '') {
+      alert('Oh')
+    } else {
+      setTodos([...todos, { id: newId, todo: text, status: 1 }]);
+    }
+  }
   return (
     <div className="App">
       <>
-        <TodoForm />
+        <TodoForm addTask={addTask} newTask={newTask}/>
         <TodoFilter />
-        <TodoList />
+        <TodoList todos={todos} setTodos={setTodos} />
       </>
     </div>
   );

@@ -1,6 +1,16 @@
-import React from 'react'
+import React, {useState} from 'react'
 
-export default function TodoForm() {
+export default function TodoForm(props) {
+  let text = props.newTask;
+  const handleChange = (e) => {
+    // setText(e.target.value);
+    props.newTask(e.target.value);
+  }
+  const addTask = (text) => {
+    props.addTask();
+    props.newTask(text);
+    
+  }
   return (
     <div>
       <>
@@ -8,8 +18,15 @@ export default function TodoForm() {
           <div className="section">
             <div className="field">
               <div className="control">
-               <input class="input is-rounded" type="text" placeholder="Rounded input" />
+                <input
+                  className="input is-rounded"
+                  type="text"
+                  placeholder="Rounded input"
+          
+                  onChange={(e) => handleChange(e)}
+                />
               </div>
+     
             </div>
             <div className="field is-horizontal">
              <div className="field">
@@ -42,9 +59,9 @@ export default function TodoForm() {
             </div>
             </div>
 
-            <div class="field">
-            <p class="control">
-              <button class="button is-success">
+            <div className="field">
+            <p className="control">
+              <button className="button is-success" onClick={() => addTask(text)}>
                 追加
               </button>
             </p>
