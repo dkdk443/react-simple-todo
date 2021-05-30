@@ -12,6 +12,11 @@ function App() {
     { id: 3, todo: 'タスク3', status: 2 },
     { id: 4, todo: 'タスク4', status: 3 }
   ]);
+  const [status, setStatus] = useState([
+    { id: 1, status: 'TODO'},
+    { id: 2, status: 'DOING' },
+    { id: 3, status: 'DONE' },
+  ])
   const [text, setText] = useState('');
   let newId = todos.slice(-1)[0].id + 1;
   const newTask = (text) => {
@@ -29,7 +34,7 @@ function App() {
       <>
         <TodoForm addTask={addTask} newTask={newTask}/>
         <TodoFilter />
-        <TodoList todos={todos} setTodos={setTodos} />
+        <TodoList todos={todos} setTodos={setTodos} status={status} />
       </>
     </div>
   );
